@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	get_file_size();
+});
+
+function get_file_size(){
+	$("#mytest").change(function(){
+		var files_count = $(this)[0].files.length;
+		if(files_count > 0){
+			var size = $(this)[0].files[0].size;
+			console.log(size);
+			$("#filesize").html(size);
+		}
+	});
+}
+</script>
+</head>
+<body>
+<input type="file" accept="image/jpg" id="mytest">
+<span id="filesize"></span>
+</body>
+</html>
