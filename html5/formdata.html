@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/web/static/jquery-2.1.0.js"></script>
+        <script>
+            $(function(){
+                $('#test-btn').click(function(){
+                    var test_form = new FormData($("form")[0]);
+                    test_form.append("a","b");
+                    $.ajax({
+                        url:'/web/php/formdata.php',
+                        type:'POST',
+                        data:test_form,
+                        processData: false,
+                        contentType: false,
+                        success:function(){
+                            console.log("ok");
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <form enctype="multipart/form-data">
+                <input type="number" name="test_number" value="" min="0" max="10">
+                <input type="file" name="test_file">
+            </form>
+            <p><button type="button" id="test-btn">测试</button></p>
+        </div>
+    </body>
+</html>
