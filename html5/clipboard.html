@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width"><script src="/web/static/jquery-2.1.0.js"></script>
+        <script>
+            $(function() {
+                var EventUtil = {
+                    addHandler: function(element, type, handler) {
+                        if (element.addEventListener) {
+                            element.addEventListener(type, handler, false);
+                        } else if (element.attachEvent) {
+                            element.attachEvent("on" + type, handler);
+                        } else {
+                            element["on" + type] = handler;
+                        }
+                    },
+                    getEvent: function(event) {
+                        return event ? event : window.event;
+                    },
+                    getClipboardText: function(event) {
+                        var clipboardData = (event.clipboardData || window.clipboardData);
+                        return clipboardData.getData("text");
+                    },
+                    setClipboardText: function(event, value) {
+                        if (event.clipboardData) {
+                            return event.clipboardData.setData("text/plain", value);
+                        } else if (window.clipboardData) {
+                            return window.clipboardData.setData("text", value);
+                        }
+                    },
+                    preventDefault: function(event) {
+                        if (event.preventDefault) {
+                            event.preventDefault();
+                        } else {
+                            event.returnValue = false;
+                        }
+                    }
+                };
+
+                var textbox = document.forms[0].elements["textbox1"]
+                EventUtil.addHandler(textbox, "copy", function(event) {
+                    event = EventUtil.getEvent(event);
+                    EventUtil.preventDefault(event);
+                    EventUtil.setClipboardText(event, "Hello world!");
+                });
+            });
+            
+            $(function() {
+                $(document).on("paste", '#test-input', function(e) {
+                    console.log(e.originalEvent.clipboardData);
+                });
+
+                $(document).on("copy", '#test-input', function(e) {
+                    console.log(e.originalEvent.clipboardData);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <p><button type="button" id="test-btn">测试</button></p>
+        <div>
+            <form>
+                <input type="text" id="test-input">
+            </form>
+        </div>
+    </body>
+</html>
