@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).on('click','#compare',function(){
+	var a = parseInt($('#a').val());
+	var b = parseInt($('#b').val());
+	if(a > b){
+		var result = 'a>b a+b=' + (a+b);
+	}else if(a < b){
+		var result = 'a<b a-b=' + (a-b);
+	}else{
+		var result = 'a==b';
+	}
+	$('#result').val(result);
+});
+</script>
+</head>
+<body>
+<div>
+	<p><label>请输入a：<input type="number" min="0" id="a"/></label></p>
+	<p><label>请输入b：<input type="number" min="0" id="b"/></label></p>
+	<p><button type="button" id="compare">比较</button></p>
+	<p><input type="text" id="result"/></p>
+</div>
+</body>
+</html>
